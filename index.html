@@ -3,389 +3,97 @@
 <head>
     <meta charset="UTF-8">
     <title>La Culebrita Aesthetic</title>
-    <!-- Fuentes modernas -->
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <!-- Conexión al manifiesto para la Store -->
+    <link rel="manifest" href="manifest.json">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&family=Pacifico&display=swap" rel="stylesheet">
     <style>
         body {
-            /* Fondo Aesthetic Lofi */
-            background-image: url('https://images.unsplash.com/photo-1534796636912-3b95b3ab5986?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            
+            background: linear-gradient(135deg, #fdfcfb 0%, #e2d1c3 100%);
+            margin: 0;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            margin: 0;
-            color: #fff;
-            font-family: 'Poppins', sans-serif;
-            overflow: hidden;
-            position: relative;
+            font-family: 'Quicksand', sans-serif;
+            color: #555;
         }
 
-        /* TEXTO GIGANTE DE FONDO */
-        .bg-text {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 12vw;
-            font-family: 'Orbitron', sans-serif;
-            font-weight: 900;
-            color: transparent;
-            -webkit-text-stroke: 2px rgba(143, 211, 244, 0.15); /* Borde cian semitransparente */
-            text-shadow: 0 0 40px rgba(255, 126, 179, 0.1); /* Resplandor rosa */
-            white-space: nowrap;
-            z-index: 0; /* Lo pone al fondo */
-            pointer-events: none;
-            user-select: none;
-        }
-
-        /* EFECTO DE LÍNEAS DE MONITOR VIEJO (Scanlines) */
-        .scanlines {
-            position: fixed;
-            top: 0; left: 0; width: 100vw; height: 100vh;
-            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.15) 50%);
-            background-size: 100% 4px;
-            z-index: 100; /* Lo pone por encima de todo */
-            pointer-events: none; /* Permite hacer clic a través de él */
-        }
-
-        /* Contenedores de Cristal */
         .screen {
-            background: rgba(15, 5, 25, 0.7);
-            padding: 40px 50px;
-            border-radius: 20px;
-            border: 1px solid rgba(255, 126, 179, 0.3);
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6), 0 0 20px rgba(143, 211, 244, 0.1) inset;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 40px;
+            border-radius: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
             text-align: center;
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            display: none; 
-            min-width: 350px;
-            z-index: 10; /* Por encima del texto gigante */
-            position: relative;
+            backdrop-filter: blur(10px);
+            display: none;
         }
 
-        .active {
-            display: block;
-            animation: floatUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-        }
+        .active { display: block; }
 
-        @keyframes floatUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
+        /* Título con letra cursiva suave (Pacifico) */
         h1 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 40px;
-            background: linear-gradient(45deg, #ff7eb3, #8fd3f4);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 30px;
-            letter-spacing: 4px;
-            text-shadow: 0px 0px 20px rgba(255, 126, 179, 0.4);
+            font-family: 'Pacifico', cursive;
+            font-size: 50px;
+            color: #ff9a9e;
+            margin-bottom: 5px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
         }
 
-        h2 {
-            font-family: 'Orbitron', sans-serif;
-            color: #8fd3f4;
-            letter-spacing: 2px;
-            margin-bottom: 20px;
+        /* Texto suave adicional */
+        .subtitle {
+            font-size: 18px;
+            color: #a18cd1;
+            margin-bottom: 30px;
         }
 
         button {
             display: block;
-            width: 100%;
-            margin: 15px 0;
-            padding: 15px;
-            background: rgba(255, 255, 255, 0.03);
-            color: #fff;
-            border: 1px solid rgba(143, 211, 244, 0.4);
-            border-radius: 8px;
-            font-size: 16px;
-            font-weight: 600;
+            width: 200px;
+            margin: 10px auto;
+            padding: 12px;
+            border: none;
+            border-radius: 20px;
+            background: #ffecd2;
+            color: #888;
+            font-weight: bold;
             cursor: pointer;
-            transition: all 0.3s ease;
-            font-family: 'Poppins', sans-serif;
-            letter-spacing: 2px;
-            text-transform: uppercase;
+            transition: 0.3s;
         }
 
-        button:hover {
-            background: rgba(143, 211, 244, 0.2);
-            border-color: #8fd3f4;
-            box-shadow: 0 0 15px rgba(143, 211, 244, 0.5);
-            transform: translateY(-2px) scale(1.02);
-            color: #fff;
-        }
+        button:hover { background: #ff9a9e; color: white; }
 
-        .toggle-btn {
-            border-color: #ff7eb3;
-            color: #ff7eb3;
-        }
-
-        .toggle-btn:hover {
-            background: rgba(255, 126, 179, 0.2);
-            border-color: #ff7eb3;
-            box-shadow: 0 0 15px rgba(255, 126, 179, 0.5);
-        }
-
-        #scoreBoard {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 26px;
-            margin-bottom: 15px;
-            color: #fff;
-            letter-spacing: 2px;
-            text-shadow: 0 0 10px #8fd3f4;
-        }
-
-        #score {
-            color: #ff7eb3;
-            font-weight: 900;
-            text-shadow: 0 0 15px #ff7eb3;
-        }
-
-        /* JUEGO MÁS GRANDE CON CUADRÍCULA ESTILO TRON */
         canvas {
-            background-color: rgba(5, 5, 10, 0.85);
-            background-image: 
-                linear-gradient(rgba(143, 211, 244, 0.05) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(143, 211, 244, 0.05) 1px, transparent 1px);
-            background-size: 20px 20px;
-            border: 2px solid #8fd3f4;
-            border-radius: 12px;
-            box-shadow: 0 0 30px rgba(143, 211, 244, 0.2), 0 0 20px rgba(255, 126, 179, 0.2) inset;
-            display: block;
-            margin: 0 auto;
-        }
-
-        p {
-            color: #b0b0b0;
-            font-size: 15px;
-            margin-bottom: 20px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
         }
     </style>
 </head>
 <body>
 
-    <!-- LÍNEAS DE MONITOR Y TEXTO GIGANTE -->
-    <div class="scanlines"></div>
-    <div class="bg-text">LA CULEBRITA</div>
-
-    <audio id="bgMusic" loop>
-        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-17.mp3" type="audio/mpeg">
-    </audio>
-
     <div id="menuScreen" class="screen active">
-        <h1>LA CULEBRITA</h1>
-        <button onclick="iniciarJuego()">Iniciar Partida</button>
+        <h1>La Culebrita</h1>
+        <p class="subtitle">¡Deslízate hacia la victoria! ✨</p>
+        <button onclick="iniciarJuego()">Jugar Ahora</button>
         <button onclick="mostrarOpciones()">Ajustes</button>
-        <button onclick="salirJuego()">Salir</button>
     </div>
 
-    <div id="optionsScreen" class="screen">
-        <h2>AJUSTES</h2>
-        <p>Vibra con la música.</p>
-        <button id="musicBtn" class="toggle-btn" onclick="toggleMusic()">🎵 Música: APAGADA</button>
-        <button onclick="mostrarMenu()" style="margin-top: 30px;">Volver</button>
-    </div>
-
-    <div id="exitScreen" class="screen">
-        <h2>SISTEMA APAGADO</h2>
-        <p>Nos vemos en el ciberespacio.</p>
-        <button onclick="mostrarMenu()">Reiniciar</button>
-    </div>
-
+    <!-- PANTALLA DE JUEGO (Simplificada) -->
     <div id="gameScreen" class="screen">
-        <div id="scoreBoard">PUNTOS: <span id="score">0</span></div>
-        <!-- EL CANVAS AHORA ES DE 600x600 -->
-        <canvas id="gameCanvas" width="600" height="600"></canvas>
-        <button onclick="mostrarMenu()" style="margin-top: 25px; padding: 12px;">Desconectar</button>
+        <canvas id="gameCanvas" width="400" height="400"></canvas>
+        <button onclick="mostrarMenu()">Volver</button>
     </div>
 
     <script>
-        const canvas = document.getElementById("gameCanvas");
-        const ctx = canvas.getContext("2d");
-
-        const menuScreen = document.getElementById("menuScreen");
-        const optionsScreen = document.getElementById("optionsScreen");
-        const exitScreen = document.getElementById("exitScreen");
-        const gameScreen = document.getElementById("gameScreen");
-
-        const bgMusic = document.getElementById("bgMusic");
-        const musicBtn = document.getElementById("musicBtn");
-        let isMusicPlaying = false;
-        let userInteracted = false; 
-
-        bgMusic.volume = 0.3; 
-
-        function toggleMusic() {
-            if (isMusicPlaying) {
-                bgMusic.pause();
-                musicBtn.innerText = "🎵 Música: APAGADA";
-                isMusicPlaying = false;
-            } else {
-                bgMusic.play();
-                musicBtn.innerText = "🎵 Música: ENCENDIDA";
-                isMusicPlaying = true;
-            }
-        }
-
-        function autoStartMusic() {
-            if (!userInteracted && !isMusicPlaying) {
-                bgMusic.play().then(() => {
-                    isMusicPlaying = true;
-                    musicBtn.innerText = "🎵 Música: ENCENDIDA";
-                }).catch(e => console.log("Bloqueado por el navegador"));
-                userInteracted = true;
-            }
-        }
-
-        let gameLoopId; 
-        let isPlaying = false;
-
-        function ocultarPantallas() {
-            menuScreen.classList.remove("active");
-            optionsScreen.classList.remove("active");
-            exitScreen.classList.remove("active");
-            gameScreen.classList.remove("active");
-        }
-
-        function mostrarMenu() {
-            autoStartMusic();
-            ocultarPantallas();
-            menuScreen.classList.add("active");
-            isPlaying = false;
-            cancelAnimationFrame(gameLoopId);
-        }
-
-        function mostrarOpciones() {
-            autoStartMusic();
-            ocultarPantallas();
-            optionsScreen.classList.add("active");
-        }
-
-        function salirJuego() {
-            ocultarPantallas();
-            exitScreen.classList.add("active");
-            if (isMusicPlaying) toggleMusic(); 
-        }
-
         function iniciarJuego() {
-            autoStartMusic();
-            ocultarPantallas();
-            gameScreen.classList.add("active");
-            
-            // CENTRAMOS LA SERPIENTE EN EL NUEVO TABLERO DE 600px
-            snake.x = 300;
-            snake.y = 300;
-            snake.cells = [];
-            snake.maxCells = 4;
-            snake.dx = gridSize;
-            snake.dy = 0;
-            score = 0;
-            document.getElementById("score").innerText = score;
-            
-            isPlaying = true;
-            requestAnimationFrame(loop);
+            document.getElementById('menuScreen').classList.remove('active');
+            document.getElementById('gameScreen').classList.add('active');
         }
-
-        // --- MOTOR DEL JUEGO ---
-        const gridSize = 20;
-        let count = 0;
-        let score = 0;
-
-        // Posición inicial ajustada
-        let snake = { x: 300, y: 300, dx: gridSize, dy: 0, cells: [], maxCells: 4 };
-        let food = { x: 400, y: 400 };
-
-        // Modificado para un tablero de 30 celdas (600 / 20 = 30)
-        function getRandomInt(min, max) {
-            return Math.floor(Math.random() * (max - min)) + min;
+        function mostrarMenu() {
+            document.getElementById('gameScreen').classList.remove('active');
+            document.getElementById('menuScreen').classList.add('active');
         }
-
-        function loop() {
-            if (!isPlaying) return;
-
-            gameLoopId = requestAnimationFrame(loop);
-
-            if (++count < 5) return;
-            count = 0;
-
-            ctx.clearRect(0,0,canvas.width,canvas.height);
-
-            snake.x += snake.dx;
-            snake.y += snake.dy;
-
-            if (snake.x < 0) { snake.x = canvas.width - gridSize; }
-            else if (snake.x >= canvas.width) { snake.x = 0; }
-            if (snake.y < 0) { snake.y = canvas.height - gridSize; }
-            else if (snake.y >= canvas.height) { snake.y = 0; }
-
-            snake.cells.unshift({x: snake.x, y: snake.y});
-            if (snake.cells.length > snake.maxCells) {
-                snake.cells.pop();
-            }
-
-            // DIBUJAR COMIDA (Oro / Amarillo Neón)
-            ctx.shadowBlur = 15;
-            ctx.shadowColor = "#f5d020";
-            ctx.fillStyle = "#f5d020";
-            ctx.beginPath();
-            ctx.arc(food.x + gridSize/2, food.y + gridSize/2, gridSize/2 - 2, 0, 2 * Math.PI);
-            ctx.fill();
-
-            // DIBUJAR SERPIENTE
-            snake.cells.forEach(function(cell, index) {
-                // Estética: Cabeza Cian Neón, Cuerpo Rosa Oscuro
-                if (index === 0) {
-                    ctx.fillStyle = "#00f2fe"; 
-                    ctx.shadowColor = "#00f2fe";
-                    ctx.shadowBlur = 15;
-                } else {
-                    ctx.fillStyle = "#fe5196"; 
-                    ctx.shadowBlur = 0; 
-                }
-                
-                ctx.fillRect(cell.x + 2, cell.y + 2, gridSize - 4, gridSize - 4);
-
-                if (cell.x === food.x && cell.y === food.y) {
-                    snake.maxCells++;
-                    score += 10;
-                    document.getElementById("score").innerText = score;
-                    // Ahora la comida aparece entre 0 y 30 (límites del nuevo mapa)
-                    food.x = getRandomInt(0, 30) * gridSize;
-                    food.y = getRandomInt(0, 30) * gridSize;
-                }
-
-                for (let i = index + 1; i < snake.cells.length; i++) {
-                    if (cell.x === snake.cells[i].x && cell.y === snake.cells[i].y) {
-                        snake.x = 300; snake.y = 300; snake.cells = [];
-                        snake.maxCells = 4; snake.dx = gridSize; snake.dy = 0;
-                        score = 0; document.getElementById("score").innerText = score;
-                    }
-                }
-            });
-            ctx.shadowBlur = 0; 
-        }
-
-        document.addEventListener('keydown', function(e) {
-            if (!isPlaying) return; 
-
-            if ((e.which === 37 || e.which === 65) && snake.dx === 0) {
-                snake.dx = -gridSize; snake.dy = 0;
-            } else if ((e.which === 38 || e.which === 87) && snake.dy === 0) {
-                snake.dy = -gridSize; snake.dx = 0;
-            } else if ((e.which === 39 || e.which === 68) && snake.dx === 0) {
-                snake.dx = gridSize; snake.dy = 0;
-            } else if ((e.which === 40 || e.which === 83) && snake.dy === 0) {
-                snake.dy = gridSize; snake.dx = 0;
-            }
-        });
     </script>
 </body>
 </html>
